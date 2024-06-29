@@ -79,7 +79,7 @@
             <appender-ref ref="AZURE_JSON_CONSOLE"/>
         </root>
     </springProfile>
-    <springProfile name="persistent | dev | tdf">
+    <springProfile name="persistent | dev | tdf | postgres">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>

@@ -1,0 +1,127 @@
+#spring:
+#  datasource:
+#    url: jdbc:h2:file:/data/demo
+
+application:
+  security:
+    enabled: true
+    apiKey: "123"
+    basic:
+      enabled: false
+  features:
+    modules:
+      objects:
+        enabled: false
+        configuration:
+          mode: local
+          path: "D:/Graphen/entities/objects"
+      applications:
+        enabled: false
+      admin:
+        enabled: true
+      jobs:
+        enabled: true
+        scheduled:
+          detectDuplicates:
+            enabled: true
+          replaceIdentifiers:
+            enabled: true
+          typeCoercion:
+            enabled: true
+          exportApplication:
+            enabled: true
+            defaultLocalPath: "C:/Exports"
+            defaultS3Host: "http://127.0.0.1:9000"
+            defaultS3BucketId: "test"
+      navigation:
+        enabled: true
+    transformers:
+      replaceGlobalIdentifiers: true
+      replaceAnonymousIdentifiers: true
+      mergeDuplicates: true
+      typeCoercion: true
+    validators:
+      checkRequiredType: true
+  storage:
+    implementation: "r2dbc"
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:32771/graph
+    username: user
+    password: pass
+  data:
+    r2dbc:
+      initialization-mode: always
+      schema: classpath:sql/schema.sql
+      data: classpath:db/data.sql
+
+#  storage:
+#    vocabularies:
+#      persistent: true
+#      path: "C:/Graphen/vocabularies"
+#    system:
+#      persistent: true
+#      path: "C:/Graphen/system"
+#    entities:
+#      persistent: true
+#      path: "C:/Graphen/entities"
+#    transactions:
+#      persistent: true
+#      path: "C:/Graphen/transactions"
+
+
+
+logging:
+  level:
+    root: INFO
+    graph:
+      jobs: TRACE
+      repo: TRACE
+      srvc: TRACE
+      ctrl: TRACE
+      feat: TRACE
+    org:
+      eclipse:
+        rdf4j: DEBUG
+      springframework:
+        security: INFO
+
+management:
+  info:
+    env:
+      enabled: true
+    git:
+      enabled: true
+      mode: full
+  health:
+    defaults:
+      enabled: false
+    probes:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "health, info, env, beans, git, loggers, metrics, scheduledTasks, logfile, mappings, prometheus, jobs"
+  endpoint:
+    jobs:
+      enabled: true
+    discovery:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+    env:
+      enabled: true
+    loggers:
+      enabled: true
+    metrics:
+      enabled: true
+    scheduledTasks:
+      enabled: true
+    logfile:
+      enabled: true
+    prometheus:
+      enabled: true
